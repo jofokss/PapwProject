@@ -1,16 +1,23 @@
 package papw.project.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import papw.project.dao.YenAndEuroDAO;
 import papw.project.model.YenAndEuro;
 
 @Controller
 
 public class PapwController {
+	
+	@Autowired
+	private YenAndEuroDAO dao;
 	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -24,8 +31,13 @@ public class PapwController {
 		return new ModelAndView("formD");
 	}
 	
-	@RequestMapping(value = "/formD", method = RequestMethod.POST)
-	public ModelAndView ShowConv(@ModelAttribute YenAndEuro yenAndEuro) {
+
+	@PostMapping(value = "/conversao")
+	public ModelAndView conversaoYE(@ModelAttribute YenAndEuro yenAndEuro) {
+		
+		dao = new YenAndEuroDAO();
+		dao.save(yenAndEuro);
+		
 		ModelAndView view = new ModelAndView("formD");
 		if(yenAndEuro.getya() > 0) {
 			view.addObject("mensagem","Valor em Yens: ¥ "+ yenAndEuro.gety());
@@ -34,10 +46,8 @@ public class PapwController {
 		}else {
 			view.addObject("mensagem");
 		}
-		
-		
-		
 		return view;
-	}	
+	}
+	
 
 }

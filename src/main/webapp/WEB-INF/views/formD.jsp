@@ -9,9 +9,9 @@
 </head>
 <body>
 	<H3>Conversor entre Yens e Euros</H3>
-	<form:form method="POST" modelAttribute="yenAndEuro">
-		<p>Digite a quantidade de Euros que deseja converter: ¤ <form:input path="euro"/></p>
-		<p>Digite a quantidade de Yens que deseja converter: ¥ <form:input path="yen"/></p>
+	<form:form method="POST" modelAttribute="yenAndEuro" action="conversao">
+		<p>Digite a quantidade de Euros que deseja converter: â‚¬ <form:input path="euro"/></p>
+		<p>Digite a quantidade de Yens que deseja converter: Â¥ <form:input path="yen"/></p>
 		<p><form:button>Converter</form:button> </p>
 		<p>${mensagem}</p>
 	</form:form>
